@@ -1,0 +1,204 @@
+using System;
+using System.Collections.Concurrent;
+using System.Net.Http.Headers;
+
+namespace Katya15_07_FirstCode
+{
+    class Program
+    {
+        public static void RemainingOfFive()
+        {
+            //print the remaining from 5 of the number in a word using switch case
+            Console.WriteLine("Enter a number to see the ramining of 5");
+            int num = CheckIfNumber(Console.ReadLine());
+            num = num % 5;
+            switch(num)
+            {
+                case (0):
+                    Console.WriteLine("Zero");
+                    break;
+                case (1):
+                    Console.WriteLine("One");
+                        break;
+                case (2):
+                    Console.WriteLine("Two");
+                    break;
+                case (3):
+                    Console.WriteLine("Three");
+                    break;
+                case (4):
+                    Console.WriteLine("Four");
+                    break;
+            }
+        }
+        public static void SumOfDigits(int number)
+        {
+            //recieve a number of any size and prints the sum of all of his digits
+            int flag=number;
+            int count = 0;
+            int sum = 0;
+            while (flag != 0)
+            {
+                flag = flag / 10;
+                count++;
+            }
+            for (int i=0; i<count; i++)
+            {
+                sum = sum + (number%10);
+                number = number / 10;
+
+            }
+            Console.WriteLine($"The sum of all digits is {sum}");
+        }
+      public static void SumOfThreeDigits()
+        {
+            int sum, hundreds, tens, ones;
+            int num = CheckIfNumber(Console.ReadLine());
+            if (num < 100 && num>999)
+            {
+                Console.WriteLine("Number does not have 3 digits");
+                return;
+            }
+            hundreds = num / 100;
+            num = num - (hundreds * 100);
+            tens = num / 10;
+            num = num - (tens * 10);
+            ones = num;
+            sum = hundreds + tens + ones;
+            Console.WriteLine($"The sum of the three digits is {(num/100)+((num/10)%10)+(num%10)}");
+
+
+            
+        }
+        public static int CheckIfNumber(string inputNum)
+        {
+            //Check if inputNum is a number if not repeat until it is a number
+            int numberC = 0;
+            while ((int.TryParse(inputNum, out numberC) == false))
+            {
+                Console.WriteLine("Enter a valid number");
+                inputNum = Console.ReadLine();
+            }
+            return numberC;
+        }
+        
+        public static void PrintAndRecieveSmall()
+        {
+            //recieve 3 numbers and oraganize them from small to big
+            int big=0, mid=0, small=0;
+            Console.WriteLine("Enter 3 Numbers");
+            int number1 = CheckIfNumber(Console.ReadLine());
+            int number2 = CheckIfNumber(Console.ReadLine());
+            int number3 = CheckIfNumber(Console.ReadLine());
+            if (number1 >= (number2))
+            {
+                big = number1;
+                small = number2;
+            }
+            else
+            {
+                big = number2;
+                small = number1;
+            }
+            if (number3>=big)
+            {
+                mid = big;
+                big=number3;
+            }
+            else if (number3<=small)
+            {
+                mid = small;
+                small = number3;
+            }
+                else
+                {
+                mid = number3;
+                }
+            
+           Console.WriteLine($"Min : {small} Medium : {mid} Max : {big}");
+        }
+        public static void PrintFromSmall(int num1, int num2, int num3)
+            {
+            //print numbers is order smallest to biggest
+            Console.WriteLine("From small to big");
+            if (num1 <= num2 && num1 <= num3)
+            {
+                Console.WriteLine(num1);
+                if (num2 <= num3)
+                {
+                    Console.WriteLine(num2);
+                    Console.WriteLine(num3);
+                }
+                else
+                {
+                    Console.WriteLine(num3);
+                    Console.WriteLine(num2);
+                }
+            }
+            if (num2 < num1 && num2 < num3)
+            {
+                Console.WriteLine(num2);
+                if (num1<=num3)
+                {
+                    Console.WriteLine(num1);
+                    Console.WriteLine(num3);
+                }
+                else
+                {
+                    Console.WriteLine(num3);
+                    Console.WriteLine(num1);
+                }
+            }
+            if (num3 < num1 && num3 < num2)
+            {
+                Console.WriteLine(num3);
+                if (num1<=num2)
+                {
+                    Console.WriteLine(num1);
+                    Console.WriteLine(num2);
+                }
+                else
+                {
+                    Console.WriteLine(num2);
+                    Console.WriteLine(num1);
+                }
+            }
+
+
+ 
+            }
+        public static bool CheckIfPositive(int value)
+        {
+            //Check if value is positive or negative
+            if (value<0)
+            {
+                Console.WriteLine("Number is negative");
+                return true;
+            }
+            Console.WriteLine("Number is positive");
+            return false;
+        }
+        static void Main(string[] args)
+        {
+            RemainingOfFive();
+            int numberForDigits = CheckIfNumber(Console.ReadLine());
+            SumOfDigits(numberForDigits);
+            SumOfThreeDigits();
+            PrintAndRecieveSmall();
+            Console.WriteLine("Enter a number to check if it is positive or negative");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            CheckIfPositive(num1);
+            Console.WriteLine("Enter 3 numbers");
+            int number1 = CheckIfNumber(Console.ReadLine());
+            int number2 = CheckIfNumber(Console.ReadLine());
+            int number3 = CheckIfNumber(Console.ReadLine());
+            PrintFromSmall(number1, number2, number3);
+           /*  
+            if (number1==number2)                     //Check if number1 eq to number2
+                Console.WriteLine($"Number 1 : {number1} and Number 2 : {number2} Are equal ");
+            else
+                Console.WriteLine($"Number 1 : {number1} and Number 2 : {number2} Are not equal ");
+          */
+            }
+    }
+}
