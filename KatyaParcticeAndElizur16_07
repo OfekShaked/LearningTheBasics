@@ -1,0 +1,300 @@
+using System;
+using System.Threading;
+
+namespace ElizurPractice16_07
+{
+    class Program
+    {
+        /*
+         num1+=num2;
+        num2=num1-num2;
+        num1-=num2;
+         */
+        public static int CheckIfNumber(string num)
+        {
+            int conv = 0;
+            while (int.TryParse(num, out conv) == false)
+            {
+                Console.WriteLine("Your number is not valid enter a valid number");
+                num = Console.ReadLine();
+            }
+            return conv;
+        }
+        public static void Exercise1()
+        {
+            //exercise 1 gets a number and calculates its digits
+            Console.WriteLine("Enter a three digits number");
+            int num = CheckIfNumber(Console.ReadLine());
+            while (num < 100 || num > 999)
+            {
+                Console.WriteLine("Enter a number with 3 digits!");
+                num = CheckIfNumber(Console.ReadLine());
+            }
+            Console.WriteLine($"The sum of the digits of {num} is {(num / 100) + ((num / 10) % 10) + (num % 10)}");
+        }
+        public static void Exercise2()
+        {
+            //exercise 2 get 2 numbers and print the sum of divison big number/small number
+            Console.WriteLine("Enter two numbers");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            int num2 = CheckIfNumber(Console.ReadLine());
+            if (num1 >= num2)
+            {
+                Console.WriteLine($"The division of biggest number {num1} in smallest {num2} is {num1 / num2} And the ramining is {num1 % num2}");
+                Console.WriteLine($"The exact division of biggest number {num1} in smallest {num2} is {(float)num1 / num2}");
+            }
+            else
+            {
+                Console.WriteLine($"The division of biggest number {num2} in smallest {num1} is {num2 / num1} and the remaining is {num2 % num1}");
+                Console.WriteLine($"The exact division of biggest number {num2} in smallest {num1} is {(float)num2 / num1}");
+            }
+
+        }
+        public static void Exercise3()
+        {
+            //exercise 3 get a number with 2 digits and print its biggest digit
+            Console.WriteLine("Enter a 2 digit number");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            while (num1 < 10 || num1 > 99)
+            {
+                Console.WriteLine("Enter a valid number with 2 digits");
+                num1 = CheckIfNumber(Console.ReadLine());
+            }
+            if (num1 / 10 >= num1 % 10)
+            {
+                Console.WriteLine($"The tens digit {num1 / 10} is bigger than the ones digit {num1 % 10}");
+            }
+            else
+                Console.WriteLine($"The ones digit {num1 % 10} is bigger than tens digit {num1 / 10}");
+        }
+        public static void Exercise4()
+        {
+            //get 4 numbers and print the smallest and biggest number
+            Console.WriteLine("Enter 4 numbers");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            int num2 = CheckIfNumber(Console.ReadLine());
+            int num3 = CheckIfNumber(Console.ReadLine());
+            int num4 = CheckIfNumber(Console.ReadLine());
+            int min, max;
+            if (num1 > num2)
+            {
+                max = num1;
+                min = num2;
+            }
+            else
+            {
+                min = num1;
+                max = num2;
+            }
+            if (num3 > max)
+                max = num3;
+            else if (num3 < min)
+                min = num3;
+            if (num4 > max)
+                max = num4;
+            else if (num4 < min)
+                min = num4;
+            Console.WriteLine($"The biggest number is {max} And the smallest number is {min}");
+        }
+        public static void Exercise5()
+        {
+            //Exercise 5 count the amount of even numbers
+            Console.WriteLine("Enter 4 numbers");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            int num2 = CheckIfNumber(Console.ReadLine());
+            int num3 = CheckIfNumber(Console.ReadLine());
+            int num4 = CheckIfNumber(Console.ReadLine());
+            int count = 0;
+            if (num1 % 2 == 0)
+                count++;
+            if (num2 % 2 == 0)
+                count++;
+            if (num3 % 2 == 0)
+                count++;
+            if (num4 % 2 == 0)
+                count++;
+            Console.WriteLine($"The number of even numbers is {count}");
+        }
+        public static void Exercise6()
+        {
+            //Exercise 6 gets 3 number and checks if the average is the same bigger or smaller from the middle number in size
+            Console.WriteLine("Enter 3 numbers");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            int num2 = CheckIfNumber(Console.ReadLine());
+            int num3 = CheckIfNumber(Console.ReadLine());
+            int min, mid = num3, max;
+            if (num1 >= num2)
+            {
+                max = num1;
+                min = num2;
+            }
+            else
+            {
+                max = num2;
+                min = num1;
+            }
+            if (num3 >= max)
+            {
+                mid = max;
+                max = num3;
+            }
+            else if (num3 < min)
+            {
+                mid = min;
+                min = num3;
+            }
+            if (((float)(num1 + num2 + num3) / 3) > mid)
+                Console.WriteLine($"The Average  {(float)(num1 + num2 + num3) / 3} Is bigger than middle number {mid}");
+            if (((float)(num1 + num2 + num3) / 3) < mid)
+                Console.WriteLine($"The Average  {(float)(num1 + num2 + num3) / 3} Is smaller than middle number {mid}");
+            if (((float)(num1 + num2 + num3) / 3) == mid)
+                Console.WriteLine($"The Average  {(float)(num1 + num2 + num3) / 3} Is the same as middle number {mid}");
+        }
+        public static void Exercise7()
+        {
+            //Exercise 7 get 2 numbers with 3 digits and calculate the sum of their digits and print if the sum is equal bigger or smaller
+            Console.WriteLine("Enter 2 numbers with 3 digits");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            int num2 = CheckIfNumber(Console.ReadLine());
+            int sum1, sum2;
+            while (num1 < 100 || num1 > 999)
+            {
+                Console.WriteLine("Enter a valid number with 3 digits");
+                num1 = CheckIfNumber(Console.ReadLine());
+            }
+            while (num2 < 100 || num2 > 999)
+            {
+                Console.WriteLine("Enter a valid number with 3 digits");
+                num1 = CheckIfNumber(Console.ReadLine());
+            }
+            sum1 = (num1 / 100) + (num1 / 10) % 10 + (num1 % 10);
+            sum2 = (num2 / 100) + (num2 / 10) % 10 + (num2 % 10);
+            if (sum1 > sum2)
+                Console.WriteLine($"The sum({sum1}) of number1 {num1} digits is bigger than the sum({sum2}) of number2 {num2} digits ");
+            if (sum2 < sum1)
+                Console.WriteLine($"The sum({sum2}) of number2 {num2} digits is bigger than the sum({sum1}) of number1 {num1} digits ");
+            if (sum1 == sum2)
+                Console.WriteLine($"The sum({sum1}) of number1 {num1} digits is the same as the sum({sum2}) of number2 {num2} digits");
+        }
+        public static void CheckDevision()
+        {
+            //Get 2 numbers and the operation you want to do between them and print the operation
+            Console.WriteLine("Enter 2 numbers");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            int num2 = CheckIfNumber(Console.ReadLine());
+            while (num2 == 0)
+            {
+                Console.WriteLine("Number 2 cannot be 0");
+                num2 = CheckIfNumber(Console.ReadLine());
+            }
+            Console.WriteLine("Enter +  -   *   /   ^   Min     Max");
+            string operation = Console.ReadLine();
+            switch (operation)
+            {
+                case "+":
+                    Console.WriteLine($"Number 1 + Number 2 is {num1 + num2}");
+                    break;
+                case "-":
+                    Console.WriteLine($"Number 1 - Number 2 is {num1 - num2}");
+                    break;
+                case "*":
+                    Console.WriteLine($"Number 1 * Number 2 is {num1 * num2}");
+                    break;
+                case "/":
+                    Console.WriteLine($"Number 1 / Number 2 is {(float)(num1 / num2)}");
+                    break;
+                case "^":
+                    Console.WriteLine($"Number 1 ^ Number 2 is {Math.Pow(num1, num2)}");
+                    break;
+                case "min":
+                case "Min":
+                    Console.WriteLine($"Number 1 or number 2 min is {Math.Min(num1, num2)}");
+                    break;
+                case "Max":
+                case "max":
+                    Console.WriteLine($"Number 1 or number 2 max is {Math.Max(num1, num2)}");
+                    break;
+            }
+        }
+        public static void BirthdayDate()
+        {
+            //get a birthday year day month in numbers and print the month as name
+            Console.WriteLine("Enter Your birthday year");
+            int year = CheckIfNumber(Console.ReadLine());
+            while (year < 1900 || year > 2020)
+            {
+                Console.WriteLine("Enter a vaild year");
+                year = CheckIfNumber(Console.ReadLine());
+            }
+            Console.WriteLine("Enter Your birthday month");
+            int month = CheckIfNumber(Console.ReadLine());
+            while (month < 1 || month > 12)
+            {
+                Console.WriteLine("Enter a vaild month");
+                month = CheckIfNumber(Console.ReadLine());
+            }
+            Console.WriteLine("Enter Your birthday day");
+            int day = CheckIfNumber(Console.ReadLine());
+            while (day<1 || day>31)
+            {
+                Console.WriteLine("Enter a vaild day");
+                day = CheckIfNumber(Console.ReadLine());
+            }
+            Console.WriteLine($"Your age is years : {DateTime.Now.Year-year} months : {DateTime.Now.Month-month} days : {DateTime.Now.Day-day}");
+
+            switch (month)
+            {
+                case 1:
+                    Console.WriteLine($"{day} January {year}");
+                    break;
+                case 2:
+                    Console.WriteLine($"{day} February {year}");
+                    break;
+                case 3:
+                    Console.WriteLine($"{day} March {year}");
+                    break;
+                case 4:
+                    Console.WriteLine($"{day} April {year}");
+                    break;
+                case 5:
+                    Console.WriteLine($"{day} May {year}");
+                    break;
+                case 6:
+                    Console.WriteLine($"{day} June {year}");
+                    break;
+                case 7:
+                    Console.WriteLine($"{day} July {year}");
+                    break;
+                case 8:
+                    Console.WriteLine($"{day} August {year}");
+                    break;
+                case 9:
+                    Console.WriteLine($"{day} September {year}");
+                    break;
+                case 10:
+                    Console.WriteLine($"{day} October {year}");
+                    break;
+                case 11:
+                    Console.WriteLine($"{day} November {year}");
+                    break;
+                case 12:
+                    Console.WriteLine($"{day} December {year}");
+                    break;
+            }
+            
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            BirthdayDate();
+            CheckDevision();
+            Exercise7();
+            Exercise6();
+            Exercise5();
+            Exercise4();
+            Exercise3();
+            Exercise2();
+            Exercise1();
+        }
+    }
+}
