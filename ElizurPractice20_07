@@ -1,0 +1,199 @@
+using System;
+using System.Xml;
+
+namespace ElizuerPractice20_7
+{
+    public static
+    class Program
+    {
+        static float num1, num2, num3, res;
+        static string opp1, opp2;
+
+        public static int CheckIfNumber(string num)
+        {
+            int number;
+            while (int.TryParse(num, out number) == false)
+            {
+                Console.WriteLine("Enter a Valid number!");
+                num = Console.ReadLine();
+            }
+            return number;
+        }
+        public static string CheckIfOpp(string operation)
+        {
+            //
+            while (operation != "+" || operation != "-" || operation != "/" || operation != "*")
+            {
+                Console.WriteLine("Enter a Valid operation!");
+                operation = Console.ReadLine();
+            }
+            return operation;
+        }
+        static void Main(string[] args)
+        {
+            //Calculator with 2 operations
+            MagicFindNumber();
+            Main2();
+            Console.WriteLine("Primitive calculator");
+            Console.WriteLine("Please enter your input (number)");
+            num1 = CheckIfNumber(Console.ReadLine());
+            Console.WriteLine("Please enter your input(+,-,*,/)");
+            opp1 = CheckIfOpp(Console.ReadLine());
+            Console.WriteLine("Please enter your input (number)");
+            num2 = CheckIfNumber(Console.ReadLine());
+            Console.WriteLine("Please enter your second input(+,-,*,/)");
+            opp2 = CheckIfOpp(Console.ReadLine());
+            Console.WriteLine("Please enter your input (number)");
+            num3 = CheckIfNumber(Console.ReadLine());
+            switch (opp1)
+            {
+                case "+":
+                    res = num1 + num2;
+                    break;
+                case "-":
+                    res = num1 - num2;
+                    break;
+                case "*":
+                    res = num1 * num2;
+                    break;
+                default:
+                    if (num2 == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Can't divide by zero!!!");
+                    }
+                    else
+                        res = (float)num1 / num2;
+                    break;
+            }
+            switch (opp2)
+            {
+                case "+":
+                    res = res + num3;
+                    break;
+                case "-":
+                    res = res - num3;
+                    break;
+                case "*":
+                    res = res * num3;
+                    break;
+                default:
+                    if (num3 == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Can't divide by zero!!!");
+                    }
+                    else
+                        res = (float)res / num3;
+                    break;
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"**************  {res}  ****************");
+
+            Console.ReadKey();
+        }
+        static void Main2()
+        {
+            //get 4 names and organize them alphabeticly
+            string max, min, mid;
+            string anm1, anm2, anm3, anm4;
+            Console.WriteLine("Enter 4 animal names");
+            anm1 = Console.ReadLine();
+            anm2 = Console.ReadLine();
+            anm3 = Console.ReadLine();
+            anm4 = Console.ReadLine();
+            if (anm1.CompareTo(anm2) >= 0)
+            {
+                max = anm1;
+                min = anm2;
+            }
+            else
+            {
+                max = anm2;
+                min = anm1;
+            }
+            if (anm3.CompareTo(max) >= 0)
+            {
+                mid = max;
+                max = anm3;
+            }
+            else if (anm3.CompareTo(min) <= 0)
+            {
+                mid = min;
+                min = anm3;
+            }
+            else mid = anm3;
+            if (anm4.CompareTo(max) >= 0)
+            {
+                Console.WriteLine(anm4);
+                Console.WriteLine(max);
+                Console.WriteLine(mid);
+                Console.WriteLine(min);
+            }
+            else if (anm4.CompareTo(mid) >= 0)
+            {
+                Console.WriteLine(max);
+                Console.WriteLine(anm4);
+                Console.WriteLine(mid);
+                Console.WriteLine(min);
+            }
+            else if (anm4.CompareTo(min) <= 0)
+            {
+                Console.WriteLine(max);
+                Console.WriteLine(mid);
+                Console.WriteLine(min);
+                Console.WriteLine(anm4);
+            }
+            else
+            {
+                Console.WriteLine(max);
+                Console.WriteLine(mid);
+                Console.WriteLine(anm4);
+                Console.WriteLine(min);
+            }
+
+
+        }
+        static void MagicFindNumber()
+        {
+            int min, max, test=0;
+            max = 1000; min = 0;
+            int num = CheckIfNumber(Console.ReadLine());
+            while (num < 0 || num > 1000)
+            {
+                Console.WriteLine("Enter a number 0-1000");
+                num = CheckIfNumber(Console.ReadLine());
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                test = (min + max) / 2;
+                if (num > test)
+                {
+                    min = test;
+                }
+                else
+                    max = test;
+            }
+            Console.WriteLine($"Max - {max} Min - {min} Test - {test}");
+        }
+        static void HebrewToWorld()
+        {
+            Console.WriteLine("Enter the hebrew month number");
+            int month = CheckIfNumber(Console.ReadLine());
+            while (month<0||month>12)
+            {
+                Console.WriteLine("Enter a valid number 1-12");
+                month = CheckIfNumber(Console.ReadLine());
+            }
+            if (month<=6)
+                Console.WriteLine($"Month number world wide is {month+6}");
+            else
+                Console.WriteLine($"Month number world wide is {month-6}");
+        }
+    }
+}
+
+
+
+
