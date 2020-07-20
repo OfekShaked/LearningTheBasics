@@ -1,0 +1,119 @@
+using System;
+
+namespace TicTacToePractice
+{
+    class Program
+    {
+        public static void YouWin(int counter)
+        {
+
+            if (counter % 2 != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("-----------------------------------------------------------------------------------");
+                Console.WriteLine("- xx     xx    xx    xx   xxxxxxx   xx     xx    xx           xx  xx  xx     xx----");
+                Console.WriteLine("-  xx   xx     xx    xx  xx     xx  xx     xx    xx           xx  xx  xxxx   xx----");
+                Console.WriteLine("-   xx xx      xx    xx  xx     xx  xx     xx     xx         xx   xx  xx x   xx----");
+                Console.WriteLine("-     xx        xx  xx   xx     xx  xx     xx     xx         xx   xx  xx   x xx----");
+                Console.WriteLine("-   xx xx         xx     xx     xx  xx     xx      xx  xxx  xx    xx  xx   x xx----");
+                Console.WriteLine("-  xx   xx        xx     xx     xx  xx     xx       xx xxx xx     xx  xx    xxx----");
+                Console.WriteLine("- xx     xx       xx       xxxxx      xxxxx          xx   xx      xx  xx     xx----");
+                Console.WriteLine("--------------------------------------------------------------------------------");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("--------------------------------------------------------------------------------------");
+                Console.WriteLine("-   xxxxxxx      xx    xx   xxxxxxx   xx     xx    xx           xx  xx  xx     xx-----");
+                Console.WriteLine("-  xx     xx     xx    xx  xx     xx  xx     xx    xx           xx  xx  xxxx   xx-----");
+                Console.WriteLine("-  xx     xx     xx    xx  xx     xx  xx     xx     xx         xx   xx  xx x   xx-----");
+                Console.WriteLine("-  xx     xx      xx  xx   xx     xx  xx     xx     xx         xx   xx  xx   x xx-----");
+                Console.WriteLine("-  xx     xx        xx     xx     xx  xx     xx      xx  xxx  xx    xx  xx   x xx-----");
+                Console.WriteLine("-  xx     xx        xx     xx     xx  xx     xx       xx xxx xx     xx  xx    xxx-----");
+                Console.WriteLine("-   xxxxxxx         xx       xxxxx      xxxxx          xx   xx      xx  xx     xx-----");
+                Console.WriteLine("--------------------------------------------------------------------------------------");
+            }
+        }
+        public static void Draw()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("   xxx      xxxxxx      xx      xx       xx  ");
+            Console.WriteLine("   xx  xx   xx   xx   xx  xx    xx       xx  ");
+            Console.WriteLine("   xx   xx  xxxxxxx   xxxxxx     xx     xx   ");
+            Console.WriteLine("   xx  xx   xx  xx   xx    xx     xx x xx    ");
+            Console.WriteLine("   xxxx     xx   xx  xx    xx      xx xx     ");
+            Console.WriteLine("---------------------------------------------");
+        }
+        public static void PrintTicTacToe(char[] ticTac)
+        {
+            Console.WriteLine($"   {ticTac[0]}   |    {ticTac[1]}    |    {ticTac[2]}   ");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine($"   {ticTac[3]}   |    {ticTac[4]}    |    {ticTac[5]}   ");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine($"   {ticTac[6]}   |    {ticTac[7]}    |    {ticTac[8]}   ");
+
+        }
+        public static int CheckIf0To8(string number)
+        {
+            int num;
+            while ((int.TryParse(number, out num) == false) || num < 0 || num > 8)
+            {
+                Console.WriteLine("Enter a valid number 0-8");
+                number = Console.ReadLine();
+            }
+            return num;
+        }
+        public static int CheckIfUsed(int choice, char[] ticTac)
+        {
+            while (ticTac[choice] == 'X' || ticTac[choice] == 'O')
+            {
+                Console.WriteLine("This place already has been chosen please check a different place");
+                choice = CheckIf0To8(Console.ReadLine());
+            }
+            return choice;
+        }
+        static void Main(string[] args)
+        {
+            int choisee;
+            int countTurn = 1;
+            char[] ticTac = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8' };
+            PrintTicTacToe(ticTac);
+            for (int i = 0; i < 9; i++)
+            {
+                if (countTurn % 2 == 0)
+                {
+                    Console.WriteLine("Its turn to place an X! Pick your choice");
+                    choisee = CheckIfUsed(CheckIf0To8(Console.ReadLine()), ticTac);
+                    ticTac[choisee] = 'X';
+                    PrintTicTacToe(ticTac);
+                    countTurn++;
+                }
+                else
+                {
+                    Console.WriteLine("Its turn to place an O! Pick your choice");
+                    choisee = CheckIfUsed(CheckIf0To8(Console.ReadLine()), ticTac);
+                    ticTac[choisee] = 'O';
+                    PrintTicTacToe(ticTac);
+                    countTurn++;
+                }
+                if (i > 2)
+                {
+                    if ((ticTac[0] == ticTac[1] && ticTac[1] == ticTac[2]) || (ticTac[0] == ticTac[3] && ticTac[3] == ticTac[6]) || ((ticTac[0] == ticTac[4]) && ticTac[4] == ticTac[8]) || (ticTac[3] == ticTac[4] && ticTac[4] == ticTac[5]) || (ticTac[6] == ticTac[7] && ticTac[7] == ticTac[8]) || (ticTac[1] == ticTac[4] && ticTac[4] == ticTac[7]) || (ticTac[2] == ticTac[5] && ticTac[5] == ticTac[8]) || (ticTac[2] == ticTac[4] && ticTac[4] == ticTac[6]))
+                    {
+                        YouWin(countTurn);
+                        return;
+                    }
+                    else
+                    {
+                        Draw();
+                        return;
+                    }
+                }
+            }
+
+        }
+
+    }
+}
+
