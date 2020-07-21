@@ -1,0 +1,113 @@
+using System;
+using System.Globalization;
+using System.Threading;
+
+namespace ElizurPractice21_07
+{
+    class Program
+    {
+        public static int CheckIfNumber(string number)
+        {
+            //Check if string is a number and if it isnt get another number max 10 tries
+            int num = 0,count=0;
+            while (int.TryParse(number, out num) == false)
+            {
+                Console.WriteLine("Enter a valid number");
+                number = Console.ReadLine();
+                count++;
+                if (count == 10)
+                {
+                    Console.WriteLine("You have reach the limit of trials! BYE BYE!!");
+                    Environment.Exit(0);
+                }
+            }
+            return num;
+        }
+        static void PrintTo100()
+        {
+            //print numbers 1-100 using while
+            int count = 1;
+            while (count<=100)
+            {
+                Console.WriteLine(count);
+                count++;
+            }
+        }
+        static void CalculateWhileAvg()
+        {
+            //Calculate the average of x amount of number until you type a character and not a number
+            int count=0, num = 0 ,avg=0;
+            Console.WriteLine("Enter a Number");
+            while (int.TryParse(Console.ReadLine(),out num))
+            {
+                Console.WriteLine("Enter another number");
+                avg += num;
+                count++;
+                
+            }
+            if (count>0)
+            Console.WriteLine($"The average is {(float)avg / count}");
+        }
+        static void PowerOverMil()
+        {
+            //Calculate the power of 2 as long as its under a million
+            double res=1,count=0;
+            while (res<1000000)
+            {
+                Console.WriteLine($"The power of 2^{count} is {res}");
+                count++;
+                res = (int)Math.Pow(2, count);
+                
+            }
+        }
+        static void NumericNumbersTo100()
+        {
+            //print sum of all prime numbers from 1-100
+            int count = 1,sum=2, i=2;
+            while (count<100)
+            {
+                while (count % i != 0)
+                {
+                    i++;
+                    if (i == count)
+                        i++;
+                    if (i==9)
+                    {
+                        Console.WriteLine($"{count} is a prime number");
+                        sum += count;
+                        break;
+                    }
+                }
+                i = 2;
+                count++;
+             
+            }
+            Console.WriteLine(sum);
+        }
+        static void PrintDotsForNumber()
+        {
+            //print * in a pyramid from the number you get lik * ** *** for 3
+            int count = 1;
+            Console.WriteLine("Enter the number for the pyramid base");
+            int num = CheckIfNumber(Console.ReadLine());
+            for (int i = 0; i < num; i++)
+            {
+                for (int j = 0; j < count; j++)
+                {
+                    Console.Write("*");
+                }
+                count++;
+                Console.WriteLine();
+            }
+        }
+        static void Main(string[] args)
+        {
+            //PrintDotsForNumber();
+            //NumericNumbersTo100();
+            //PrintTo100();
+           // int num = CheckIfNumber(Console.ReadLine());
+           // PowerOverMil();
+           // CalculateWhileAvg();
+        }
+    }
+}
