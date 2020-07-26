@@ -1,0 +1,142 @@
+using System;
+using System.ComponentModel;
+using System.Globalization;
+
+namespace KatyaLoopsSec26_07
+{
+    class Program
+    {
+        public static int CheckIfNumber(string check)
+        {
+            //check if string is a valid int
+            int num;
+            while (int.TryParse(check, out num)==false)
+            {
+                Console.WriteLine("Enter a valid number");
+                check = Console.ReadLine();
+            }
+            return num;
+        }
+        public static float CheckIfNumberF(string check)
+        {
+            //check if string is a valid float
+            float num;
+            while (float.TryParse(check, out num) == false)
+            {
+                Console.WriteLine("Enter a valid number");
+                check = Console.ReadLine();
+            }
+            return num;
+        }
+        static void FirstAssig()
+        {
+            //count to number from start value to end value in the steps you enter
+            Console.WriteLine("Enter start value can be float");
+            float startValue = CheckIfNumberF(Console.ReadLine());
+            Console.WriteLine("Enter end value");
+            float endValue = CheckIfNumberF(Console.ReadLine());
+            Console.WriteLine("Enter a number can be float");
+            float step = CheckIfNumberF(Console.ReadLine());
+            if (startValue>=endValue)
+            {
+                while (startValue>endValue)
+                    Console.WriteLine(endValue += step);
+            }
+            else
+            { 
+                while (endValue>startValue)
+                    Console.WriteLine(startValue += step); 
+            }
+        }
+        static void PrintStarsLines()
+        {
+            //print lines of * as the number you enter
+            int starsPerLine, linesCnt;
+            string s;
+
+            do
+            {
+                Console.Write("enter count of stars per line: ");
+                s = Console.ReadLine();
+
+            } while (!int.TryParse(s, out starsPerLine));
+            do
+            {
+                Console.Write("enter count of lines: ");
+                s = Console.ReadLine();
+
+            } while (!int.TryParse(s, out linesCnt));
+            for (int j = 0; j < linesCnt; j++)
+            {
+                for (int i = 0; i < starsPerLine; i++)
+                {
+                    Console.Write("* ");
+                }
+                //Console.Write("\n");
+                Console.WriteLine();
+            }
+        }
+        static void PrintNumberFromZero()
+        {
+            //print number from zero to the number you enter 10 times
+            int num,count=0;
+            Console.WriteLine("Enter 10 numbers");
+            for (int i = 0; i < 10; i++)
+            {
+                count = 0;
+                num = CheckIfNumber(Console.ReadLine());
+                while (count<=num)
+                {
+                    Console.Write($"{count} ");
+                    count++;
+                }
+                Console.WriteLine();
+            }
+        }
+        static void PrintTriangleStars()
+        {
+            //print triangle of * in the middle of the console rows and lines of *
+            int num = CheckIfNumber(Console.ReadLine());
+            int space;
+            for (int j = 1; j <= num; j++)//Rows
+            {
+                    space = (80 - j*2) / 2  ;
+                for (int i = 0; i < space; i++)//Space Before
+                {
+                    Console.Write(" ");
+                }
+                for (int l = 1; l <= j; l++)//Stars
+                {
+                            Console.Write("* "); 
+                }
+                Console.WriteLine();
+                
+            }
+        }
+        static void AveragePrint()
+        {
+            //Get average of all numbers until you enter 0
+            int num=1,sum=0,count=0;
+            Console.WriteLine("Enter number to get average enter 0 to finish");
+            while (num!=0)
+            {
+                num = CheckIfNumber(Console.ReadLine());
+                sum += num;
+                count++;
+
+            }
+            if (sum==0)
+                Console.WriteLine("No numbers entered");
+            else
+            Console.WriteLine($"Sum is {sum/(count-1)} and in float is {(float)sum/(count-1)} the count of numbers is {count-1}");
+        }
+        static void Main(string[] args)
+        {
+            AveragePrint();
+            PrintTriangleStars();
+            PrintNumberFromZero();
+            PrintStarsLines();
+            FirstAssig();
+        }
+    }
+}
