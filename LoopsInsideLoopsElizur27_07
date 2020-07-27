@@ -1,0 +1,458 @@
+using System;
+using System.Runtime.ExceptionServices;
+
+namespace ElizurConsolePractice27_07
+{
+    class Program
+    {
+        public static int CheckIfNumber(string s)
+        {
+            int num;
+            while (int.TryParse(s, out num) == false)
+            {
+                Console.WriteLine("Enter a valid number");
+                s = Console.ReadLine();
+            }
+            return num;
+        }
+        static void PrintMagenDavid1()
+        {
+            int num = CheckIfNumber(Console.ReadLine());
+            int space = num, spaceB = 0;
+            int count = 40;
+            for (int j = 1; j <= num; j++)//number of lines
+            {
+                if (j > 1)
+                {
+                    count = 40 - Math.Max(j, space);
+                    if (space == 1)
+                        count = 39;
+                }
+                for (int i = 0; i < count; i++)//space before *
+                {
+                    Console.Write(" ");
+                }
+                if (j == 1 || space == 1)
+                {
+                    Console.Write("*");
+                }
+                else
+                {
+                    for (int l = 0; l < Math.Max(j, space); l++)
+                    {
+                        Console.Write("* ");
+                    }
+                }
+                space--;
+                Console.WriteLine();
+
+            }
+        }
+        static void PrintMeoyan()
+        {
+            int num = CheckIfNumber(Console.ReadLine());
+            int space;
+            for (int i = 1; i <= num; i++)//lines
+            {
+                space = 40 - i;
+                for (int j = 0; j < space; j++)//Spaces before the *
+                {
+                    Console.Write(" ");
+                }
+                if (i != 1)
+                    Console.Write("*");
+                for (int k = -1; k < (i - 2) * 2; k++)//spaces between *
+                {
+                    Console.Write(" ");
+                }
+
+                Console.Write("*");
+                Console.WriteLine();
+            }
+            //Backwards Triangle
+            for (int l = num - 1; l >= 1; l--) //New Line
+            {
+                space = 40 - l;
+                for (int m = 0; m < space; m++)//Spaces Before the *
+                {
+                    Console.Write(" ");
+                }
+
+                Console.Write("*");
+                for (int u = -1; u < (l - 2) * 2; u++)//spaces between *
+                {
+                    Console.Write(" ");
+                }
+                if (l != 1)
+                    Console.Write("*");
+                Console.WriteLine();
+            }
+
+
+
+        }
+        static void PrintMagenDavid4Trian()
+        {
+            int count, counter;
+            int num = CheckIfNumber(Console.ReadLine());
+            int space;
+            count = num;
+            counter = 0;
+            //Middle Top Triangle
+            for (int i = 1; i <= num; i++)//lines
+            {
+                space = 40 - i;
+                for (int j = 0; j < space; j++)//Spaces before the *
+                {
+                    Console.Write(" ");
+                }
+                if (i != 1)
+                    Console.Write("*");
+                if (i != num)
+                    for (int k = -1; k < (i - 2) * 2; k++)//spaces between *
+                    {
+                        Console.Write(" ");
+                    }
+                else
+                {
+                    for (int k = -1; k < (i - 2) * 2; k++)//spaces between *
+                    {
+                        Console.Write("*");
+                    }
+                }
+                Console.Write("*");
+                Console.WriteLine();
+            }
+            //middle 2 triangle top
+            for (int i = num; i >= 2; i--) //Rows Reverse
+            {
+
+                space = 42 - num * 3 + counter;
+                for (int j = 0; j < space; j++)//spaces before *
+                {
+                    Console.Write(" ");
+                }
+                if (i > 2)
+                    Console.Write("*");//First Triangle
+                if (i != num)
+                {
+                    for (int j = 0; j < (i - 2) * 2; j++)//Spaces between *
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                else
+                    for (int j = 0; j < (i - 2) * 2; j++)//Spaces between *
+                    {
+                        Console.Write("*");
+                    }
+                if (i>=2)
+                Console.Write("*");
+                for (int j = 0; j < count * 2 + counter * 2; j++)//Space After first trian
+                {
+                    Console.Write(" ");
+                }
+                if (i == 2)
+                    Console.Write(" ");
+                if (i >2)
+                    Console.Write("*");//Second triangle
+                if (i != num)
+                {
+                    for (int j = 0; j < (i - 2) * 2; j++)//space between *
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                else
+                    for (int j = 0; j < (i - 2) * 2; j++)//space between *
+                    {
+                        Console.Write("*");
+                    }
+                if (i>=2)
+                Console.Write("*");
+                //count += 2;
+                counter++;
+                Console.WriteLine();
+            }
+            //Middle 2 Triangle Bottom
+            counter = 0;count = num;
+            for (int i = 2; i <=num; i++) //Rows Reverse
+            {
+
+                space = 42 - num * 2 - i;
+                for (int j = space; j > 0; j--)//spaces before *
+                {
+                    Console.Write(" ");
+                }
+                if (i>2)
+                    Console.Write("*");//First Triangle
+                if (i != num)
+                {
+                    for (int j = 0; j < (i - 2) * 2; j++)//Spaces between *
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                else
+                    for (int j = 0; j < (i - 2) * 2; j++)//Spaces between *
+                    {
+                        Console.Write("*");
+                    }
+                if (i>=2)
+                    Console.Write("*");
+                for (int j = 0; j < count * 4 - i * 2; j++)//Space After first trian
+                {
+                    Console.Write(" ");
+                }
+                if (i == 2)
+                    Console.Write(" ");
+                if (i>2)
+                    Console.Write("*");//Second triangle
+                if (i != num)
+                {
+                    for (int j = 0; j < (i - 2) * 2; j++)//space between *
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                else
+                    for (int j = 0; j < (i - 2) * 2; j++)//space between *
+                    {
+                        Console.Write("*");
+                    }
+                if (i>=2)
+                    Console.Write("*");
+                //count += 2;
+                Console.WriteLine();
+            }
+            //middle bottom triangle
+            for (int i = num; i >= 1; i--)//lines
+            {
+                space = 40 - i;
+                for (int j = 0; j < space; j++)//Spaces before the *
+                {
+                    Console.Write(" ");
+                }
+                if (i != 1)
+                    Console.Write("*");
+                if (i != num)
+                    for (int k = -1; k < (i - 2) * 2; k++)//spaces between *
+                    {
+                        Console.Write(" ");
+                    }
+                else
+                {
+                    for (int k = -1; k < (i - 2) * 2; k++)//spaces between *
+                    {
+                        Console.Write("*");
+                    }
+                }
+                Console.Write("*");
+                Console.WriteLine();
+            }
+
+
+
+
+
+
+
+
+
+
+            static void ElizurAA()
+            {
+                int num = 10;
+
+                // משולש ממורכז
+                for (int i = 0; i <= num; i++) // row 1
+                {
+                    for (int j = 0; j < num; j++)
+                    {
+                        Console.Write("  ");
+                    }
+
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+                    for (int j = 0; j < i; j++) // triangle
+                    {
+                        Console.Write("* ");
+                    }
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+
+                    for (int j = 0; j < num; j++)
+                    {
+                        Console.Write("  ");
+                    }
+                    Console.WriteLine();
+                }
+                for (int i = num; i > 0; i--) // row 2
+                {
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+                    for (int j = 0; j < i; j++) // triangle
+                    {
+                        Console.Write("* ");
+                    }
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+
+                    for (int j = 0; j < num; j++)
+                    {
+                        Console.Write("  ");
+                    }
+
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+                    for (int j = 0; j < i; j++) // triangle
+                    {
+                        Console.Write("* ");
+                    }
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+                    Console.WriteLine();
+                }
+
+                for (int i = 0; i <= num; i++) // row 3
+                {
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+                    for (int j = 0; j < i; j++) // triangle
+                    {
+                        Console.Write("* ");
+                    }
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+
+                    for (int j = 0; j < num; j++)
+                    {
+                        Console.Write("  ");
+                    }
+
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+                    for (int j = 0; j < i; j++) // triangle
+                    {
+                        Console.Write("* ");
+                    }
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+                    Console.WriteLine();
+                }
+                for (int i = num; i > 0; i--) // row 4
+                {
+                    for (int j = 0; j < num; j++)
+                    {
+                        Console.Write("  ");
+                    }
+
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+                    for (int j = 0; j < i; j++) // triangle
+                    {
+                        Console.Write("* ");
+                    }
+                    for (int j = num; j > i; j--) // revers triangle
+                    {
+                        Console.Write(" ");
+                    }
+
+                    for (int j = 0; j < num; j++)
+                    {
+                        Console.Write("  ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+        }
+        static void Clear()
+        {
+            int count, counter;
+            int num = CheckIfNumber(Console.ReadLine());
+            int space;
+            count = num;
+            counter = 0;
+            //Middle Top Triangle
+            for (int i = 1; i <= num; i++)//lines
+            {
+                space = 40 - i;
+                for (int j = 0; j < space; j++)//Spaces before the *
+                {
+                    Console.Write(" ");
+                }
+                if (i != 1)
+                    Console.Write("*");
+                if (i != num)
+                    for (int k = -1; k < (i - 2) * 2; k++)//spaces between *
+                    {
+                        Console.Write(" ");
+                    }
+                else
+                {
+                    for (int k = -1; k < (i - 2) * 2; k++)//spaces between *
+                    {
+                        Console.Write("*");
+                    }
+                }
+                Console.Write("*");
+                Console.WriteLine();
+            }
+            //middle 2 
+            for (int i = num; i >= 1; i--) //Rows Reverse
+            {
+
+                space = 40 - num * 3 + counter;
+                for (int j = 0; j < space; j++)//spaces before *
+                {
+                    Console.Write(" ");
+                }
+                for (int j = 0; j < i; j++)//first Tria
+                {
+                    Console.Write("* ");
+                }
+                for (int j = 0; j < count * 2 + counter * 2; j++)//Space After first trian
+                {
+                    Console.Write(" ");
+                }
+                for (int j = 0; j < i; j++)//second trian
+                {
+                    Console.Write("* ");
+                }
+                //count += 2;
+                counter++;
+                Console.WriteLine();
+
+            }
+        }
+            static void Main(string[] args)
+            {
+                PrintMagenDavid4Trian();
+                //PrintMeoyan();
+
+            }
+        }
+    }
+
