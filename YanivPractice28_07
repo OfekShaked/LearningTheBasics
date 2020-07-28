@@ -1,0 +1,84 @@
+using System;
+
+namespace YanivPractice28_07
+{
+    class Program
+    {
+        public static int CheckIfNumber(string s)
+        {
+            int num;
+            while (int.TryParse(s,out num)==false)
+            {
+                Console.WriteLine("Invalid Number");
+                s = Console.ReadLine();
+            }
+            return num;
+        }
+        static void Enter10Nums()
+        {
+            //Get 10 numbers without dots 
+            int count=0,sum=0;
+            Console.WriteLine("Enter a number can be with a dot");
+            while (count<10)
+            {
+                if (int.TryParse(Console.ReadLine(),out int num))
+                {
+                    count++;
+                    sum += (int)num;
+                }    
+            }
+            Console.WriteLine($"The Sum is {sum}");
+        }
+        static void CheckFirstLastDigit()
+        {
+            //Check the amount of number whom the last digit equals the first digit
+            int count = 0, firstDig, lastDig,num;
+            for (int i = 0; i < 5; i++)
+            {
+                num = CheckIfNumber(Console.ReadLine());
+                lastDig = num % 10;
+                while (num>10)
+                {
+                    num /= 10;
+                }
+                firstDig = num;
+                if (lastDig == firstDig)
+                    count++;
+            }
+            Console.WriteLine($"Number of numbers which last dig equals first dig is {count}");
+        }
+        static void maxMinDigitSun()
+        {
+            //Get 20 numbers print max digit sum and the number and min digit sum and the number
+            int maxNum=0, minNum=0, minSum=int.MaxValue, maxSum=int.MinValue;
+            for (int i = 0; i < 20; i++)
+            {
+                int num = CheckIfNumber(Console.ReadLine());
+                int current = Math.Abs(num);
+                int sum = 0;
+                while (current!=0)
+                {
+                    sum = sum+current % 10;
+                    current /= 10;   
+                }
+                if (maxSum < sum)
+                {
+                    maxSum = sum;
+                    maxNum = num;
+                }
+                if (minSum > sum)
+                {
+                    minSum = sum;
+                    minNum = num;
+                }
+            }
+            Console.WriteLine($"Max digit sum is {maxNum} sum is {maxSum} Min digit sum is {minNum} sum is {minSum}");
+        }
+        static void Main(string[] args)
+        {
+            maxMinDigitSun();
+            CheckFirstLastDigit();
+            Enter10Nums();
+        }
+    }
+}
