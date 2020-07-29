@@ -1,0 +1,73 @@
+using System;
+using System.Threading;
+
+namespace KatyaFlowAndRandom29_07
+{
+    class Program
+    {
+        public static int CheckIfNumber(string s)
+        {
+            int num;
+            while (int.TryParse(s,out num)==false)
+            {
+                Console.WriteLine("Enter a valid number");
+                s = Console.ReadLine();
+            }
+            return num;
+        }
+        public static void PrintTillRandIs0()
+        {
+            Random rnd = new Random();
+            int num;
+            int count = 0;
+            do
+            {
+                num = rnd.Next(-20, 21);
+                count++;
+            }
+            while (num != 0);
+            Console.WriteLine($"Number of draws to get 0 is {count}");
+        }
+        static void getRandomNumberBetween()
+        {
+            Random rnd = new Random();
+            Console.WriteLine("Enter Range for random");
+            int num1 = CheckIfNumber(Console.ReadLine());
+            int num2 = CheckIfNumber(Console.ReadLine());
+            int randomNum,count=0;
+            int average = (num1 + num2) / 2;
+            do
+            {
+                    randomNum = (rnd.Next(Math.Min(num1,num2),Math.Max(num1,num2) + 1));
+                    Console.WriteLine(randomNum);
+                count++;
+            }
+            while (randomNum != average);
+            Console.WriteLine($"it took {count} Tries to get to the average {average}");
+        }
+        static void RandomFrom50to100()
+        {
+            Random rnd = new Random();
+            Console.WriteLine("Enter number of repeats");
+            int countTimes = CheckIfNumber(Console.ReadLine());
+            int range1 = rnd.Next(0, 101);
+            Console.WriteLine("Range 1 is "+range1);
+            int range2 = rnd.Next(0,101);
+            Console.WriteLine("Range 2 is "+range2);
+            for (int i = 0; i < countTimes; i++)
+            {
+                Console.WriteLine($"{(Math.Max(range1,range2)-Math.Min(range1,range2))*rnd.NextDouble()+Math.Min(range1,range2):F3}");
+            }
+        }
+        static void Main(string[] args)
+        {
+            RandomFrom50to100();
+            //getRandomNumberBetween();
+            // PrintTillRandIs0();
+            Random rnd = new Random();
+            double randomNum1To20 = (20 - 1) * rnd.NextDouble() + 1;
+            
+
+        }
+    }
+}
