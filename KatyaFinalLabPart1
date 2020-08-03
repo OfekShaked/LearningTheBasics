@@ -1,0 +1,120 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace KatyaFinalLabPart1
+{
+    class Program
+    {
+        public static Random rnd = new Random();
+        public static double CheckIfNumber(string s)
+        {
+            double num2;
+            int num1;
+            while (double.TryParse(s,out num2)==false)
+            {
+                    if (int.TryParse(s, out num1))
+                    {
+                        num2 = (double)num1;
+                        break;
+                    }
+                Console.WriteLine("Invalid input try again!");
+                s = Console.ReadLine();
+            }
+            return num2;
+        }
+        public static string CheckOneChar(string chara)
+        {
+            while (chara.Length>1||chara.Length<1)
+            {
+                Console.WriteLine("Can only enter one character Enter a valid char");
+                chara = Console.ReadLine();
+            }
+            return chara;
+        }
+        public static string MaxOfFour(int two, int four, int six, int eight)
+        {
+            int bigger1, bigger2,bigger3;
+            bigger1= Math.Max(two, four);
+            bigger2=Math.Max(six, eight);
+            bigger3 = Math.Max(bigger1, bigger2);
+            if (bigger3 == two)
+                return "Two";
+            else if (bigger3 == four)
+                return "Four";
+            else if (bigger3 == six)
+                return "Six";
+            else return "Eight";
+        }
+        public static void FinalLabPt1()
+        {
+            Console.WriteLine("Enter a number");
+            int num = (int)(Math.Round(CheckIfNumber(Console.ReadLine())));
+            int holder1,max=int.MinValue,min=10001;
+            int two=0, four=0, six=0, eight=0;
+            string charSelect;
+            for (int i = 0; i < num; i++)
+            {
+                holder1 = rnd.Next(1000, 10001);
+                if (holder1 > max)
+                    max = holder1;
+                if (holder1 < min)
+                    min = holder1;
+            }
+            int cnt = (int)Math.Pow((max + min) / 2, 1.0 / 3.0);
+            for (int i = 0; i < cnt; i++)
+            {
+                int current= rnd.Next(min, max + 1);
+                while (current!=0)
+                {
+                    switch (current%10)
+                    {
+                        case 2:
+                            two++;
+                            break;
+                        case 4:
+                            four++;
+                            break;
+                        case 6:
+                            six++;
+                            break;
+                        case 8:
+                            eight++;
+                            break;
+                    }
+                    current /= 10;
+                }
+            }
+            Console.WriteLine("Enter a character for histograph");
+            charSelect = CheckOneChar(Console.ReadLine());
+            Console.Write("2 - ");
+            for (int i = 0; i < two; i++)
+            {
+                Console.Write(charSelect);
+            }
+            Console.WriteLine();
+            Console.Write("4 - ");
+            for (int i = 0; i < four; i++)
+            {
+                Console.Write(charSelect);
+            }
+            Console.WriteLine();
+            Console.Write("6 - ");
+            for (int i = 0; i < six; i++)
+            {
+                Console.Write(charSelect);
+            }
+            Console.WriteLine();
+            Console.Write("8 - ");
+            for (int i = 0; i < eight; i++)
+            {
+                Console.Write(charSelect);
+            }
+            Console.WriteLine();
+            Console.WriteLine($"The Even Digit that showed up the most is {MaxOfFour(two,four,six,eight)}");
+        }
+        static void Main(string[] args)
+        {
+            FinalLabPt1();
+        }
+    }
+}
