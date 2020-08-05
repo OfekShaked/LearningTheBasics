@@ -1,0 +1,243 @@
+using System;
+using System.Collections.Immutable;
+using System.Threading;
+
+namespace KatyaArrays5_8
+{
+    class Program
+    {
+        public static Random rnd = new Random();
+        public static void ArrAverage()
+        {
+            
+            int sum = 0, countAboveAvr = 0, count=0; ;
+            double average;
+            int[] arr = new int[20];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = rnd.Next(200);
+                sum += arr[i];
+            }
+            average = (double)sum / arr.Length;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > average)
+                {
+                    countAboveAvr++;
+                    Console.WriteLine(arr[i]);
+                }
+            }
+            int[] aboveAvg = new int[countAboveAvr];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > average)
+                {
+                    aboveAvg[count] = arr[i];
+                    count++;
+                }
+            }
+            Console.WriteLine("Items in array above average\n");
+            foreach (int items in aboveAvg)
+            {
+                Console.WriteLine(items);
+            }
+            Console.WriteLine($"There are {countAboveAvr} Numbers above average   Average is {average}");
+        }
+        static void SequenceCheck()
+        {
+            int[] arr = new int[300];
+            int countSeqPl = 1, countSeqMin = 1, maxSeq = 0, maxSeqMin = 0;
+            int arrayPlaceHolder = 0, arrayPlaceHolderMin = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = rnd.Next(10, 21);
+                Console.WriteLine(i + "      " + arr[i]);
+            }
+            int holder = arr[0];
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (holder + 1 == arr[i])
+                {
+                    countSeqPl++;
+                    if (countSeqPl > maxSeq)
+                    {
+                        maxSeq = countSeqPl;
+                        arrayPlaceHolder = i - countSeqPl + 1;
+                    }
+                }
+                else countSeqPl = 1;
+                holder = arr[i];
+            }
+            holder = arr[0];
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (holder - 1 == arr[i])
+                {
+                    countSeqMin++;
+                    if (countSeqMin > maxSeq)
+                    {
+                        maxSeqMin = countSeqMin;
+                        arrayPlaceHolderMin = i - countSeqMin + 1;
+                    }
+                }
+                else countSeqMin = 1;
+                holder = arr[i];
+            }
+            if (maxSeq > maxSeqMin)
+            {
+                Console.WriteLine($"Max Sequence is {maxSeq} Its place is {arrayPlaceHolder} And The Numbers are going up");
+            }
+            else
+            {
+                Console.WriteLine($"Max Sequence is {maxSeqMin} Its place is {arrayPlaceHolderMin} And The Numbers are going down");
+            }
+
+        }
+        /*static void CheckSequnce()
+        {
+            //build a big array with random number from 10-20 check for the max sequence show the lenght of sequnce and check for their index and if their decending or ascending
+            int[] arr = new int[500];
+            int countSeq=1,maxSeq=0;
+            int arrayPlaceHolder=0;
+            bool plusMinus=true;
+            int counter = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = rnd.Next(10, 21);
+                Console.WriteLine(i+"  -   "+arr[i]);
+            }
+            int holder = arr[0];
+            int holder2;
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i]==holder+1)
+                {
+                    countSeq++;
+                    plusMinus = true;
+                }
+                else if (arr[i] == holder - 1)
+                {
+                    holder2 = arr[i];
+                    for (int j = i-countSeq; j < i; j++)
+                    {
+                        if (arr[j]==holder2-1)
+                        {
+                            counter++;
+                        }
+                        holder2 = arr[j];
+                    }
+                    if (counter == i - countSeq)
+                    {
+                        countSeq++;
+                        plusMinus = false;
+                    }
+                    counter = 0;
+                }
+                else
+                {
+                    countSeq = 1;
+                }
+                if (countSeq>maxSeq)
+                {
+                    maxSeq = countSeq;
+                    if (plusMinus)
+                        arrayPlaceHolder = i-maxSeq+1;
+                    else
+                        arrayPlaceHolder = i - maxSeq+1;
+                }
+                holder = arr[i];
+            }
+            for (int i = arrayPlaceHolder; i < arrayPlaceHolder+maxSeq; i++)
+            {
+                Console.WriteLine($"     {arr[i]}");
+            }
+            Console.WriteLine($"Max Sequence is {maxSeq} its place in the array is {arrayPlaceHolder}");
+        }*/
+        static void Odss()
+        {
+            int[] ar = new int[30];
+            int countEven = 0;
+            for (int i = 0; i < ar.Length; i++)
+            {
+                ar[i] = rnd.Next(1000);
+                if (ar[i] % 2 == 0)
+                    countEven++;
+            }
+            int[] evens = new int[countEven];
+            int[] odd = new int[ar.Length - countEven];
+            for (int i = 0,evenI=0,oddI=0; i < ar.Length; i++)
+            {
+                if (ar[i] % 2 == 0)
+                {
+                    evens[evenI] = ar[i];
+                    evenI++;
+                }
+                else
+                {
+                    odd[oddI] = ar[i];
+                    oddI++;
+                }
+            }
+            Console.WriteLine("Evens Are: \n");
+            foreach (int items in evens)
+            {
+                Console.WriteLine(items);
+            }
+            Console.WriteLine("Odds Are: \n");
+            foreach (int items in odd)
+            {
+                Console.WriteLine(items);
+            }
+
+        }
+        static void CountCouples()
+        {
+            int[] ar = new int[20];
+            int countAdj=0;
+            for (int i = 0; i < ar.Length; i++)
+            {
+                ar[i] = rnd.Next(5);
+                Console.WriteLine(ar[i]);
+            }
+            for (int i = 0; i < ar.Length-1; i++)
+            {
+                if (ar[i] == ar[i + 1]) countAdj++;
+            }
+            Console.WriteLine($"The number of adjacents are {countAdj}");
+        }
+        static void CountNumberRepeatitions()
+        {
+            int countRep=1;
+            int[] ar = new int[10000000];
+            for (int i = 0; i < ar.Length; i++)
+            {
+                ar[i] = rnd.Next(int.MaxValue);
+            }
+            Array.Sort(ar);
+            for (int i = 0; i < ar.Length-2; i++)
+            {
+                while (ar[i]==ar[i+1])
+                {
+                    countRep++;
+                    if (i == 998)
+                        break;
+                    i++;
+                }
+                if (countRep> 1)
+                {
+                    Console.WriteLine($"The number {ar[i - 1]} repeated {countRep} Times");
+                }
+                countRep = 0;
+            }
+        }
+        static void Main(string[] args)
+        {
+            CountNumberRepeatitions();
+            //CountCouples();
+            //Odss();
+            //SequenceCheck();
+            //CheckSequnce();
+//ArrAverage();
+        }
+    }
+}
