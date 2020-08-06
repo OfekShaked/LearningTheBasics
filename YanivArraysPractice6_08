@@ -1,0 +1,101 @@
+using System;
+using System.Threading;
+
+namespace YanivPractice6_8
+{
+    class Program
+    {
+        public static Random rnd = new Random();
+        static void Polinrum()
+        {
+            Console.WriteLine("Enter a string");
+            string s=Console.ReadLine();
+            int i=0;
+            while (true)
+            {
+                if (i==s.Length/2)
+                {
+                    Console.WriteLine("The string is identical from each side");
+                    break;
+                }
+                if (s[i]==s[s.Length-i-1])
+                {
+                    i++;
+                }
+                else
+                {
+                    Console.WriteLine("String is not identical from each side");
+                    break;
+                }    
+            }
+        }
+        static void Duplicates()
+        {
+            int[] ar = new int[50];
+            int[] ar1 = new int[50];
+            int countIdent=0;
+            for (int i = 0; i < 50; i++)
+            {
+                ar[i] = rnd.Next(100);
+                ar1[i] = rnd.Next(100);
+            }
+            for (int i = 0; i < 50; i++)
+            {
+                for (int k = 0; k < 50; k++)
+                {
+                    if (ar[i] == ar1[k]) countIdent++;  
+                }
+            }
+            Console.WriteLine($"There are {countIdent} Identical Numbers!");
+        }
+        static void Fibonachi()
+        {
+            int[] ar = new int[30];
+            ar[0] = ar[1] = 1;
+            for (int i = 2; i < 30; i++)
+            {
+                ar[i] = ar[i - 1] + ar[i - 2];
+            }
+            for (int i = 29; i >= 0; i--)
+            {
+                Console.WriteLine(ar[i]);
+            }
+        }
+        static void PrimeNumbers()
+        {
+            int[] ar = new int[10];
+            bool isPrime = true;
+            int k = 0;
+            while (k<10)
+            {
+                int num = rnd.Next(100, 10001);
+                for (int i = 2; i <= (int)Math.Sqrt(num); i++)
+                {
+                    if (num%i==0&&num!=i)
+                    {
+                        isPrime=false;
+                        break;
+                    }    
+                }
+                if (isPrime)
+                {
+                    ar[k] = num;
+                    k++;
+                }
+                isPrime = true;
+                
+            }
+            foreach (int item in ar)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        static void Main(string[] args)
+        {
+            PrimeNumbers();
+            //Fibonachi();
+            //Duplicates();
+            //Polinrum();
+        }
+    }
+}
